@@ -71,9 +71,21 @@ export async function POST(request: NextRequest) {
             if (patient_identifier) {
                 patients = await fetcher.searchPatients({ identifier: patient_identifier });
             } else {
-                // For demo, just fetch a limited set
-                // In production, you'd implement pagination or bulk export
-                patients = await fetcher.searchPatients({ name: 'Smith' });
+                // Fetch specific Epic Sandbox test patients by ID
+                const testPatientIds = [
+                    'erXuFYUfucBZaryVksYEcMg3', // Camila Lopez
+                    'eq081-VQEgP8drUUqCWzHfw3', // Derrick Lin
+                    'eAB3mDIBBcyUKviyzrxsnAw3'  // Desiree Powell
+                ];
+
+                for (const id of testPatientIds) {
+                    try {
+                        const patient = await fetcher.getPatient(id);
+                        patients.push(patient);
+                    } catch (err) {
+                        console.error(`Failed to fetch test patient ${id}:`, err);
+                    }
+                }
             }
 
             let patientsSynced = 0;
