@@ -531,7 +531,7 @@ export class FHIRResourceFetcher {
     // ============== All Records for Insurance ==============
 
     /**
-     * Fetch all insurance-relevant records for a patient
+     * Fetch all insurance-relevant records for a patient with graceful error handling
      */
     async getAllInsuranceRecords(patientId: string): Promise<{
         patient: FHIRPatient;
@@ -550,8 +550,18 @@ export class FHIRResourceFetcher {
         carePlans: FHIRCarePlan[];
         appointments: FHIRAppointment[];
     }> {
+        const safeFetch = async <T>(fn: () => Promise<T[]>, name: string): Promise<T[]> => {
+            try {
+                return await fn();
+            } catch (err: any) {
+                console.warn(`Gracefully skipped ${name} fetch:`, err.message);
+                return [];
+            }
+        };
+
+        const patient = await this.getPatient(patientId);
+
         const [
-            patient,
             coverage,
             claims,
             conditions,
@@ -567,21 +577,20 @@ export class FHIRResourceFetcher {
             carePlans,
             appointments,
         ] = await Promise.all([
-            this.getPatient(patientId),
-            this.getPatientCoverage(patientId),
-            this.getPatientClaims(patientId),
-            this.getPatientConditions(patientId),
-            this.getPatientEncounters(patientId),
-            this.getPatientProcedures(patientId),
-            this.getPatientDocuments(patientId),
-            this.getPatientMedications(patientId),
-            this.getPatientAllergies(patientId),
-            this.getPatientVitals(patientId),
-            this.getPatientLabResults(patientId),
-            this.getPatientImmunizations(patientId),
-            this.getPatientDiagnosticReports(patientId),
-            this.getPatientCarePlans(patientId),
-            this.getPatientAppointments(patientId),
+            safeFetch(() => this.getPatientCoverage(patientId), 'Coverage'),
+            safeFetch(() => this.getPatientClaims(patientId), 'Claims'),
+            safeFetch(() => this.getPatientConditions(patientId), 'Conditions'),
+            safeFetch(() => this.getPatientEncounters(patientId), 'Encounters'),
+            safeFetch(() => this.getPatientProcedures(patientId), 'Procedures'),
+            safeFetch(() => this.getPatientDocuments(patientId), 'Documents'),
+            safeFetch(() => this.getPatientMedications(patientId), 'Medications'),
+            safeFetch(() => this.getPatientAllergies(patientId), 'Allergies'),
+            safeFetch(() => this.getPatientVitals(patientId), 'Vitals'),
+            safeFetch(() => this.getPatientLabResults(patientId), 'Labs'),
+            safeFetch(() => this.getPatientImmunizations(patientId), 'Immunizations'),
+            safeFetch(() => this.getPatientDiagnosticReports(patientId), 'DiagnosticReports'),
+            safeFetch(() => this.getPatientCarePlans(patientId), 'CarePlans'),
+            safeFetch(() => this.getPatientAppointments(patientId), 'Appointments'),
         ]);
 
         return {
