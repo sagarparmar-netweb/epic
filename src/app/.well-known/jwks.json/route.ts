@@ -6,11 +6,11 @@ const publicKeyJWK = {
     keys: [
         {
             kty: "RSA",
-            n: "mdsLFd9F6kwW3bJaLjB0aospyWCqG6S2zkkSe2GsSUjaXVwzp3W2KcJY7YaGYFdWgDC0WBBDMavuvRpgoG87MUkALXL4oVA-8OQ3AcbYFn2Rg-DSNVZ3YxOnw_FTn_x3HU4XQWk6BYSq98szp_5u5eLMqjmdadsa92KKSSokXyRr_zIu_iASmla6wFXsXz2qZKx6LynNHXwr47YchQOFY53JQoFl-YjrfuJKarezxbtUC7tcuyW6m2E2VVGt-czdKAymrwwL3p0ggflreWgstCs2_c0eN9o1RVSc1o6qrUemYyykt-NSC_qUhYc9ZYHJPkLos_EQC9yhy9ff1oF2hw",
+            n: "00C58WiK50m4GnyAg-Q9VxA9CruHyv_Wj_IBMl1JT5kygrvWY5Jm8XW9wVjh2Yjz3iR4lmsI_xEYN8_UVZNhTAw3rh7z15eTj0-cz6WqM4YBCI6EhOZ0wirdp6mPzAdCVwVJLipGmjCoo083BNl-e8L5GlxDpGK1lT2GLoDmDQ_fCwuC12wkww7OJnQq_SYKzpnO43ML2wQszSbqAAtxYfx7OAfUZCCBlLVMvjA7x4cKHLDgPQqrLjIXHz_P7tEo6DAXc02ep2kkMoOixa9zj5_H5ozgmEpesztgLoRfLx_kxKr0WthwLlbhdkIIlbGUYzQH-biSY7LNdvsJowYP5w",
             e: "AQAB",
             alg: "RS384",
             use: "sig",
-            kid: "simplrecords-key-2"
+            kid: "simplrecords-key-1"
         }
     ]
 };
