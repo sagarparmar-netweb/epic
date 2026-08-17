@@ -107,7 +107,7 @@ export class EpicOAuth {
                 .setProtectedHeader({
                     alg: 'RS384',
                     typ: 'JWT',
-                    kid: 'simplrecords-key-1' // Must match JWKS kid
+                    kid: 'simplrecords-key-2' // Must match JWKS kid
                 })
                 .setIssuer(this.config.clientId)
                 .setSubject(this.config.clientId)

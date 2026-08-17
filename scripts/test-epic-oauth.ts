@@ -33,7 +33,7 @@ async function testEpicOAuth() {
         .setProtectedHeader({
             alg: 'RS384',
             typ: 'JWT',
-            kid: 'simplrecords-key-1'
+            kid: 'simplrecords-key-2'
         })
         .setIssuer(CLIENT_ID)
         .setSubject(CLIENT_ID)

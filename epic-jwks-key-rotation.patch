@@ -1,0 +1,44 @@
+diff --git a/scripts/test-epic-oauth.ts b/scripts/test-epic-oauth.ts
+index 82705bf..c129ee7 100644
+--- a/scripts/test-epic-oauth.ts
++++ b/scripts/test-epic-oauth.ts
+@@ -33,7 +33,7 @@ async function testEpicOAuth() {
+         .setProtectedHeader({
+             alg: 'RS384',
+             typ: 'JWT',
+-            kid: 'simplrecords-key-1'
++            kid: 'simplrecords-key-2'
+         })
+         .setIssuer(CLIENT_ID)
+         .setSubject(CLIENT_ID)
+diff --git a/src/app/.well-known/jwks.json/route.ts b/src/app/.well-known/jwks.json/route.ts
+index 955a274..ec6fedd 100644
+--- a/src/app/.well-known/jwks.json/route.ts
++++ b/src/app/.well-known/jwks.json/route.ts
+@@ -6,11 +6,11 @@ const publicKeyJWK = {
+     keys: [
+         {
+             kty: "RSA",
+-            n: "wc6vPcq24uNi1_P22ZVekqoT6iLrOfvIJ2g0aynmWeZrWGWFOFxtSCMtnl1t50hqLV-KRXCB1p_eHVEuxPqik9kVOl_W6Mn5gG-Mp2vM8haQ-2PZTKjpWy0K9pvB_tH0oF5duHHUZnw3VugGVFTk72sWZBw2u-WpR5uJqPuAYqmSXJTgdQWsZAYBgRFk4iYVgGzvRFaD1sxjjhSYhO59hNe5q3-Qef9O9qcdjWVwI7TBR3G3xk2hdbhaFcWqYBdrm5Oc8jmgRFYtaRT9R3l9sA2YC8TMjG_IvQqOjRr7HQgRPUHcu3sc5hwDD3bSGBxP-61RXQf9fph8oy5jvZKH8Q",
++            n: "mdsLFd9F6kwW3bJaLjB0aospyWCqG6S2zkkSe2GsSUjaXVwzp3W2KcJY7YaGYFdWgDC0WBBDMavuvRpgoG87MUkALXL4oVA-8OQ3AcbYFn2Rg-DSNVZ3YxOnw_FTn_x3HU4XQWk6BYSq98szp_5u5eLMqjmdadsa92KKSSokXyRr_zIu_iASmla6wFXsXz2qZKx6LynNHXwr47YchQOFY53JQoFl-YjrfuJKarezxbtUC7tcuyW6m2E2VVGt-czdKAymrwwL3p0ggflreWgstCs2_c0eN9o1RVSc1o6qrUemYyykt-NSC_qUhYc9ZYHJPkLos_EQC9yhy9ff1oF2hw",
+             e: "AQAB",
+             alg: "RS384",
+             use: "sig",
+-            kid: "simplrecords-key-1"
++            kid: "simplrecords-key-2"
+         }
+     ]
+ };
+diff --git a/src/lib/auth/epic-oauth.ts b/src/lib/auth/epic-oauth.ts
+index 35c5e3f..bff3572 100644
+--- a/src/lib/auth/epic-oauth.ts
++++ b/src/lib/auth/epic-oauth.ts
+@@ -107,7 +107,7 @@ export class EpicOAuth {
+                 .setProtectedHeader({
+                     alg: 'RS384',
+                     typ: 'JWT',
+-                    kid: 'simplrecords-key-1' // Must match JWKS kid
++                    kid: 'simplrecords-key-2' // Must match JWKS kid
+                 })
+                 .setIssuer(this.config.clientId)
+                 .setSubject(this.config.clientId)
